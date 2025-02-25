@@ -15,7 +15,7 @@ const DoctorForm = ({ onDoctorAdded }) => {
     setError("");
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_BASE_URI}/api/doctors`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URI}/doctors`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

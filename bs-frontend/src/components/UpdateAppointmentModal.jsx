@@ -51,7 +51,7 @@ const UpdateAppointmentModal = ({ appointmentId, onClose, onUpdate }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URI}/api/appointments/${appointmentId}`,
+        `${process.env.REACT_APP_BASE_URI}/appointments/${appointmentId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -61,7 +61,7 @@ const UpdateAppointmentModal = ({ appointmentId, onClose, onUpdate }) => {
 
       if (response.ok) {
         onUpdate(appointmentId, appointmentData);
-        setLoading(false);
+       
         alert("Update Successful");
         // setInterval(() => {
         //   onClose();
@@ -75,6 +75,8 @@ const UpdateAppointmentModal = ({ appointmentId, onClose, onUpdate }) => {
     } catch (error) {
       alert("Update Failed");
       console.error("Error updating appointment:", error);
+    }finally{
+        setLoading(false);
     }
   };
 
