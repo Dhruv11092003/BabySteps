@@ -1,0 +1,43 @@
+.header-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: #5050d6fb;
+    position: fixed;
+    top:1%;
+    width: 80%;
+    border-radius: 50px;
+  }
+
+.logo-container{
+    height:40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.company-heading{
+color: #5050d6fb;
+    font-size: 14px;
+    
+}
+
+  .appointment-btn {
+    height: 3vh;
+    width: fit-content;
+    background-color: #5050d6fb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0px 8px 0px 8px;
+  }
