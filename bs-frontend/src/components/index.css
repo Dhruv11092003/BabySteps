@@ -295,7 +295,7 @@
 .modal-content input,
 .modal-content textarea,
 .modal-content select {
-  width: 100%;
+  width: 95%;
   padding: 8px;
   margin: 5px 0;
   border-radius: 4px;
@@ -337,6 +337,71 @@
   background: #b71c1c;
 }
 
+.appointments-title{
+  color: #5050d6fb;
+  font-size: 28px;
+  text-align: center;
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff,
+    1px 1px 0 #ffffff;
+  margin-bottom: 20px;
+}
+
+.doctor-form-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.doctor-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input {
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.time-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-inputs label {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.submit-btn {
+  width: 100%;
+  background: #5050d6;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #3c3cb6;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+}
+
 
 @media screen and (min-width: 768px) {
   .home-container {
@@ -345,7 +410,8 @@
   .Appointment-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    padding-top: 5%;
+    justify-content: flex-start;
     align-items: center;
     width: 98vw;
   }

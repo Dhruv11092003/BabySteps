@@ -99,6 +99,12 @@ const UpdateAppointmentModal = ({ appointmentId, onClose, onUpdate }) => {
               name="date"
               value={appointmentData.date}
               onChange={handleChange}
+              min={new Date().toISOString().split("T")[0]} // Today's date
+              max={
+                new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+                  .toISOString()
+                  .split("T")[0]
+              } // 7 days from today
               required
             />
 

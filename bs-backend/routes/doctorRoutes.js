@@ -27,30 +27,42 @@ const updateAvailability = async () => {
     const doctors = await Doctor.find();
 
     for (const doctor of doctors) {
-      let availability = new Map(Object.entries(doctor.availability));
+      let availability = new Map(Object.entries(doctor.availability || {}));
 
-      // Get all dates and sort them
-      let dates = Array.from(availability.keys()).sort();
-
+      // Get today's date in YYYY-MM-DD format
       const today = new Date().toISOString().split("T")[0];
 
-      // Remove past dates
-      dates = dates.filter((date) => date >= today);
-      
-      // Add a new date at the end if needed
-      if (dates.length < 7) {
+      // Delete past dates
+      availability.forEach((_, date) => {
+        if (date < today) {
+          availability.delete(date);
+        }
+      });
+
+      // Convert remaining dates to an array and sort
+      let dates = Array.from(availability.keys()).sort();
+
+      // If no dates exist or today is missing, add it first
+      if (dates.length === 0 || dates[0] !== today) {
+        dates.unshift(today);
+      }
+
+      // Add new dates until we have 7 future days
+      while (dates.length < 7) {
         const lastDate = new Date(dates[dates.length - 1]);
         lastDate.setDate(lastDate.getDate() + 1);
         const newDate = lastDate.toISOString().split("T")[0];
 
+        // Create new available slots for this date
         const timeSlots = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
         const newSlots = {};
         timeSlots.forEach((time) => (newSlots[time] = true));
 
         availability.set(newDate, newSlots);
+        dates.push(newDate);
       }
 
-      // Save the updated availability
+      // Save the updated availability in the database
       doctor.availability = Object.fromEntries(availability);
       await doctor.save();
     }
@@ -61,8 +73,18 @@ const updateAvailability = async () => {
   }
 };
 
-// Run `updateAvailability` every day at midnight (server-side automation)
+// Schedule `updateAvailability` to run once a day at midnight
 setInterval(updateAvailability, 24 * 60 * 60 * 1000);
+
+// Manual route to trigger the update
+router.get("/update", async (req, res) => {
+  try {
+    await updateAvailability();
+    res.status(200).send("Doctor availability updated successfully.");
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
 // Route to create a new doctor with initial availability
 router.post("/", async (req, res) => {
