@@ -51,6 +51,7 @@ const AppointmentsList = () => {
         {appointments.map((appointment) => (
           <div key={appointment._id} className="appointment-card">
             <h3>{appointment.patientName}</h3>
+            <p><strong>Doctor ID:</strong> {appointment.doctorId}</p>
             <p><strong>Date:</strong> {appointment.date}</p>
             <p><strong>Time:</strong> {appointment.time}</p>
             <p><strong>Duration:</strong> {appointment.duration} mins</p>
