@@ -51,7 +51,7 @@ const UpdateAppointmentModal = ({ appointmentId, onClose, onUpdate }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/appointments/${appointmentId}`,
+        `${process.env.REACT_APP_BASE_URI}/api/appointments/${appointmentId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

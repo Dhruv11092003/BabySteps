@@ -15,7 +15,7 @@ const DoctorForm = ({ onDoctorAdded }) => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/doctors", {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URI}/api/doctors`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,6 +28,7 @@ const DoctorForm = ({ onDoctorAdded }) => {
       }
 
       const newDoctor = await response.json();
+
       setName(""); // Reset form
       setWorkingHours({ start: "09:00", end: "17:00" });
       alert("Doctor Added Successfully")
